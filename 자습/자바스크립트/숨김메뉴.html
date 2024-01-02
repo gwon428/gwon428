@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>숨김 메뉴 만들기</title>
+  </head>
+  <body>
+    <button id="drawer-opener">OPEN MENU</button>
+    <div class="drawer">
+      <h2>숨김 메뉴</h2>
+      <ul>
+        <li>항목 1</li>
+        <li>항목 2</li>
+      </ul>
+    </div>
+    <script>
+      function Drawer(el, open = false) {
+        // 숨김 메뉴를 생성하는 생성자 함수, 기본 인자 값을 flase로 처리
+        this.el = el;
+        this.isOpen = isOpen;
+        Object.assign(this.el.style, {
+          // 숨김 메뉴에 적용할 요소의 스타일 변경
+          display: "block",
+          position: "fixed",
+          top: 0,
+          bottom: 0,
+          right: 0,
+          width: "200px",
+          padding: "10px",
+          backgroundColor: "white",
+          boxShadow: "0 0 36px 0 rgba(0, 0, 0, 0.1)",
+          transition: "all 0.4s ease-out",
+        });
+        this.isOpen ? this.open() : this.close(); // 전달한 인자에 의해 열림 상태 정의 열림 상태가 참이면 open 메소드 실행. 아니면 close 메소드 호출
+      }
+      Drawer.prototype.open = function () {
+        // open 메소드 정의 -> 호출 시 isOpen thrtjddmf ㅅ겯fh gkfekd
+        this.isOpen = true;
+        this.el.style.transform = "translate (0px)";
+      };
+      Drawer.prototype.close = function () {
+        // close 메소드 정의 -> 호출 시 isClose 속성을 false로 할당
+        this.isOpen = false;
+        this.el.style.transform = "translate (220px)";
+      };
+
+      const sideMenu = new Drawer(document.querySelector(".drawer"));
+      document.querySelector("drawer-opener").addEventListener("click", (e) => {
+        if (!sideMenu.isOpen) {
+          sideMenu.open();
+        } else {
+          sideMenu.close();
+        }
+      });
+    </script>
+  </body>
+</html>
